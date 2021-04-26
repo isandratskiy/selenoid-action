@@ -41,7 +41,7 @@ async function replaceVersions(_chrome: string, _firefox: string) {
 			core.error(err.message);
 			throw err;
 		}
-		core.info('Created browsers.json config');
+		core.info('created browsers.json config');
 	});
 }
 

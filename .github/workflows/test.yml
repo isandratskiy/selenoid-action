@@ -12,9 +12,11 @@ jobs:
             node-version: 14
 
         - name: Setup Selenoid
-          uses: isandratskiy/selenoid-action@v0.0.1
+          uses: isandratskiy/selenoid-action@v0.0.2
           with:
             chrome_version: 90.0
             firefox_version: 87.0
 
-
+        - run: |
+            ls
+            cat browsers.json
