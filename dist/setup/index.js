@@ -1752,7 +1752,8 @@ async function run() {
         await replaceVersions(_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('chrome_version'), _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('firefox_version')).catch(err => {
             _actions_core__WEBPACK_IMPORTED_MODULE_0__.error(err.message);
         });
-        await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_2__.exec)(`curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid start --browsers-json browsers.json`);
+        await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_2__.exec)('curl -s https://aerokube.com/cm/bash');
+        await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_2__.exec)('./cm selenoid start --browsers-json browsers.json');
     }
     catch (error) {
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error.message);
