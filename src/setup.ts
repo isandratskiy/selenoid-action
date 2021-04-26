@@ -1,5 +1,6 @@
 import * as core from '@actions/core';
 import * as fs from 'fs';
+import { exec } from '@actions/exec';
 
 const BROWSERS_TEMPLATE = {
 	chrome: {
@@ -36,15 +37,25 @@ async function replaceVersions(_chrome: string, _firefox: string) {
 		.replace(/CHROME_VERSION/g, _chrome)
 		.replace(/FIREFOX_VERSION/g, _firefox);
 
-	fs.writeFile('browsers.json', browsersJson, err => {
-		if (err) {
-			core.error(err.message);
-			throw err;
-		}
-		core.info('created browsers.json config');
-	});
+	fs.writeFileSync('browsers.json', browsersJson);
 }
 
-replaceVersions(core.getInput('chrome_version'), core.getInput('firefox_version')).catch(err => {
-	core.error(err.message);
-});
+async function run() {
+	try {
+		await replaceVersions(
+			core.getInput('chrome_version'),
+			core.getInput('firefox_version')
+		).catch(err => {
+			core.error(err.message);
+		});
+
+		await exec(
+			`curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid start --browsers-json browsers.json`
+		);
+
+	} catch (error) {
+		core.setFailed(error.message);
+	}
+}
+
+run();
