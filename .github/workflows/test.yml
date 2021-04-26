@@ -3,7 +3,7 @@ on: [push]
 jobs:
   start-selenoid:
     runs-on: ubuntu-latest
-    name: Test k6 install action
+    name: Test Setup Selenoid
 
     steps:
         - name: Set up Node.js 14
