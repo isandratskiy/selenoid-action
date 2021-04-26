@@ -1,0 +1,21 @@
+name: 'Selenoid Action'
+description: 'GitHub Action to setup Selenoid for webdriver based automation tests'
+author: 'isandratskiy'
+branding:
+  icon: 'anchor'
+  color: 'blue'
+
+inputs:
+  chrome_version:
+    description: 'Server address of Docker registry. If not set then will default to Docker Hub'
+    default: '90.0'
+    required: false
+  firefox_version:
+    description: 'Username used to log against the Docker registry'
+    default: '79.0'
+    required: false
+
+runs:
+  using: 'node12'
+  main: 'dist/setup/index.js'
+  #post: 'dist/cleanup/index.js'

@@ -1,0 +1,20 @@
+on: [push]
+
+jobs:
+  start-selenoid:
+    runs-on: ubuntu-latest
+    name: Test k6 install action
+
+    steps:
+        - name: Set up Node.js 14
+          uses: actions/setup-node@v2-beta
+          with:
+            node-version: 14
+
+        - name: Setup Selenoid
+          uses: isandratskiy/selenoid-action@v0.0.1
+          with:
+            chrome_version: 90.0
+            firefox_version: 87.0
+
+
