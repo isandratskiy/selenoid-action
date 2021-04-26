@@ -17,6 +17,7 @@ jobs:
             chrome_version: 90.0
             firefox_version: 87.0
 
-        - run: |
+        - name: Check
+          run: |
             ls
             cat browsers.json
