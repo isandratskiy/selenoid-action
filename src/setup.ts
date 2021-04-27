@@ -2,7 +2,7 @@ import * as core from '@actions/core';
 import * as fs from 'fs';
 import { exec } from '@actions/exec';
 
-const BROWSERS_TEMPLATE = {
+/*const BROWSERS_TEMPLATE = {
 	chrome: {
 		default: 'CHROME_VERSION',
 		versions: {
@@ -38,19 +38,19 @@ async function replaceVersions(_chrome: string, _firefox: string) {
 		.replace(/FIREFOX_VERSION/g, _firefox);
 
 	fs.writeFileSync('browsers.json', browsersJson);
-}
+}*/
 
 async function run() {
 	try {
-		await replaceVersions(
+		/*await replaceVersions(
 			core.getInput('chrome_version'),
 			core.getInput('firefox_version')
 		).catch(err => {
 			core.error(err.message);
-		});
+		});*/
 
-		await exec('curl -s https://aerokube.com/cm/bash');
-		await exec('./cm selenoid start --browsers-json browsers.json');
+		await exec(`curl -s https://aerokube.com/cm/bash`);
+		await exec(`bash && ./cm selenoid start --browsers 'firefox:${core.getInput('firefox_version')};chrome:${core.getInput('chrome_version')}'`);
 	} catch (error) {
 		core.setFailed(error.message);
 	}

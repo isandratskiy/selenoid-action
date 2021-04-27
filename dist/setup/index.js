@@ -1705,14 +1705,11 @@ var __webpack_exports__ = {};
 __nccwpck_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(186);
 /* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(747);
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(fs__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _actions_exec__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(514);
-/* harmony import */ var _actions_exec__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__nccwpck_require__.n(_actions_exec__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _actions_exec__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(514);
+/* harmony import */ var _actions_exec__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(_actions_exec__WEBPACK_IMPORTED_MODULE_1__);
 
 
-
-const BROWSERS_TEMPLATE = {
+/*const BROWSERS_TEMPLATE = {
     chrome: {
         default: 'CHROME_VERSION',
         versions: {
@@ -1740,20 +1737,25 @@ const BROWSERS_TEMPLATE = {
         }
     }
 };
-async function replaceVersions(_chrome, _firefox) {
+
+async function replaceVersions(_chrome: string, _firefox: string) {
     const template = JSON.stringify(BROWSERS_TEMPLATE);
     const browsersJson = template
         .replace(/CHROME_VERSION/g, _chrome)
         .replace(/FIREFOX_VERSION/g, _firefox);
-    fs__WEBPACK_IMPORTED_MODULE_1__.writeFileSync('browsers.json', browsersJson);
-}
+
+    fs.writeFileSync('browsers.json', browsersJson);
+}*/
 async function run() {
     try {
-        await replaceVersions(_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('chrome_version'), _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('firefox_version')).catch(err => {
-            _actions_core__WEBPACK_IMPORTED_MODULE_0__.error(err.message);
-        });
-        await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_2__.exec)('curl -s https://aerokube.com/cm/bash');
-        await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_2__.exec)('./cm selenoid start --browsers-json browsers.json');
+        /*await replaceVersions(
+            core.getInput('chrome_version'),
+            core.getInput('firefox_version')
+        ).catch(err => {
+            core.error(err.message);
+        });*/
+        await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)(`curl -s https://aerokube.com/cm/bash`);
+        await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)(`bash && ./cm selenoid start --browsers 'firefox:${_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('firefox_version')};chrome:${_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('chrome_version')}'`);
     }
     catch (error) {
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error.message);
