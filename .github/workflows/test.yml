@@ -21,6 +21,7 @@ jobs:
             firefox_version: "87.0"
 
         - name: Check
+          if: always()
           run: |
             ls
             docker ps
