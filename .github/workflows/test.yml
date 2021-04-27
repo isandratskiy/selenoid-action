@@ -11,14 +11,15 @@ jobs:
           with:
             node-version: 14
 
-        - name: Setup Selenoid
-          uses: isandratskiy/selenoid-action@v0.0.7
-          with:
-            chrome_version: "90.0"
-            firefox_version: "87.0"
+        #- name: Setup Selenoid
+        #  uses: isandratskiy/selenoid-action@v0.0.8
+        #  with:
+        #    chrome_version: "90.0"
+        #    firefox_version: "87.0"
 
         - name: Check
           run: |
+            curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid --browsers-json browsers.json
             ls
             cat browsers.json
             docker ps
