@@ -1754,7 +1754,8 @@ async function run() {
         ).catch(err => {
             core.error(err.message);
         });*/
-        await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)(`curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid start --browsers 'firefox:${_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('firefox_version')};chrome:${_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('chrome_version')}'`);
+        await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)(`curl -s https://aerokube.com/cm/bash`);
+        await (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)(`./cm selenoid start --browsers 'firefox:${_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('firefox_version')};chrome:${_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('chrome_version')}'`);
     }
     catch (error) {
         _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(error.message);
