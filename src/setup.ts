@@ -49,8 +49,8 @@ async function run() {
 			core.error(err.message);
 		});*/
 
-		await exec(`curl -s https://aerokube.com/cm/bash`);
-		await exec(`./cm selenoid start --browsers 'firefox:${core.getInput('firefox_version')};chrome:${core.getInput('chrome_version')}'`)
+		await exec(`wget -0 cm https://github.com/aerokube/cm/releases/download/1.8.0/cm_linux_amd64`);
+		//await exec(`cm selenoid start --browsers 'firefox:${core.getInput('firefox_version')};chrome:${core.getInput('chrome_version')}'`)
 	} catch (error) {
 		core.setFailed(error.message);
 	}
