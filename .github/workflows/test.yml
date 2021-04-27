@@ -19,7 +19,7 @@ jobs:
 
         - name: Check
           run: |
-            curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid --browsers-json browsers.json
+            curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid start --browsers-json browsers.json
             ls
             cat browsers.json
             docker ps
