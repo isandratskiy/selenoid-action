@@ -50,8 +50,7 @@ async function run() {
 		});*/
 
 		await exec(
-			`curl -s https://aerokube.com/cm/bash | 
-			bash && ./cm selenoid start --browsers 'firefox:${core.getInput('firefox_version')};chrome:${core.getInput('chrome_version')}'`
+			`curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid start --browsers 'firefox:${core.getInput('firefox_version')};chrome:${core.getInput('chrome_version')}'`
 		);
 	} catch (error) {
 		core.setFailed(error.message);
