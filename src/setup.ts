@@ -1,6 +1,6 @@
 import * as core from '@actions/core';
 import * as fs from 'fs';
-import { exec } from '@actions/exec';
+import { execSync } from 'child_process';
 
 /*const BROWSERS_TEMPLATE = {
 	chrome: {
@@ -49,7 +49,7 @@ async function run() {
 			core.error(err.message);
 		});*/
 
-		await exec(`curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid start`);
+		await execSync(`curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid start`);
 		//await exec(`cm selenoid start --browsers 'firefox:${core.getInput('firefox_version')};chrome:${core.getInput('chrome_version')}'`)
 	} catch (error) {
 		core.setFailed(error.message);
