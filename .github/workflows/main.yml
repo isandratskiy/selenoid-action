@@ -23,7 +23,7 @@ jobs:
             java-version: 1.8
 
         - name: Set up Selenoid
-          uses: isandratskiy/selenoid-action@v0.2.0
+          uses: isandratskiy/selenoid-action@v0.3.0
           with:
             chrome_version: "90.0"
             firefox_version: "87.0"
