@@ -7,16 +7,20 @@ jobs:
     runs-on: ubuntu-latest
     name: Test Setup Selenoid
     env:
-      TEST_PROJECT: webdriverio5-typescript-draft
+      LANG: en_US.UTF-8
+      LC_CTYPE: en_US.UTF-8
+      TEST_PROJECT: automationpractice-github-actions-demo
 
     steps:
-        - name: Checkout
-          uses: actions/checkout@v2
-
         - name: Set up Node.js 14
           uses: actions/setup-node@v2-beta
           with:
             node-version: 14
+
+        - name: Set up JDK 1.8
+          uses: actions/setup-java@v1
+          with:
+            java-version: 1.8
 
         - name: Set up Selenoid
           uses: isandratskiy/selenoid-action@v0.2.0
@@ -24,18 +28,17 @@ jobs:
             chrome_version: "90.0"
             firefox_version: "87.0"
 
-        - name: Checkout k6 tests
+        - name: Checkout UI Tests
           uses: actions/checkout@v2
           with:
             repository: isandratskiy/${{ env.TEST_PROJECT }}
             path: ${{ env.TEST_PROJECT }}
 
         - name: Run UI Tests
-          env:
-            SELENOID: '127.0.0.1'
           run: |
             cd $TEST_PROJECT
-            npm cit
+            ./gradlew -Pthread=2 -Plaunch=remote testChrome
+            ./gradlew -Pthread=2 -Plaunch=remote testFirefox
 
         - name: Check
           if: always()
