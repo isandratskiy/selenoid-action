@@ -3,8 +3,7 @@ import { execSync } from 'child_process';
 
 const CHROME_VERSION = core.getInput('chrome_version');
 const FIREFOX_VERSION = core.getInput('firefox_version');
-const SELENOID_START_CMD =
-	'curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid start';
+const SELENOID_START_CMD = 'curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid start';
 
 async function dispatchCmd(): Promise<void> {
 	if (CHROME_VERSION && FIREFOX_VERSION)
