@@ -1,9 +1,11 @@
 on: [push]
 
 jobs:
-  start-selenoid:
+  setup-selenoid:
     runs-on: ubuntu-latest
     name: Test Setup Selenoid
+    env:
+      TEST_PROJECT: webdriverio5-typescript-draft
 
     steps:
         - name: Checkout
@@ -14,11 +16,24 @@ jobs:
           with:
             node-version: 14
 
-        - name: Setup Selenoid
-          uses: isandratskiy/selenoid-action@v0.1.7
+        - name: Set up Selenoid
+          uses: isandratskiy/selenoid-action@v0.1.8
           with:
             chrome_version: "90.0"
             firefox_version: "87.0"
+
+        - name: Checkout k6 tests
+          uses: actions/checkout@v2
+          with:
+            repository: isandratskiy/${{ env.TEST_PROJECT }}
+            path: ${{ env.TEST_PROJECT }}
+
+        - name: Run UI Tests
+          env:
+            SELENOID: '127.0.0.1'
+          run: |
+            cd $TEST_PROJECT
+            npm cit
 
         - name: Check
           if: always()

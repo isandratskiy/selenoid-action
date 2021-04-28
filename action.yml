@@ -12,10 +12,8 @@ inputs:
     required: false
   firefox_version:
     description: 'Username used to log against the Docker registry'
-    default: '79.0'
     required: false
 
 runs:
   using: 'node12'
   main: 'dist/setup/index.js'
-  #post: 'dist/cleanup/index.js'

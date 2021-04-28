@@ -1,55 +1,22 @@
 import * as core from '@actions/core';
-import * as fs from 'fs';
 import { execSync } from 'child_process';
 
-/*const BROWSERS_TEMPLATE = {
-	chrome: {
-		default: 'CHROME_VERSION',
-		versions: {
-			CHROME_VERSION: {
-				image: 'selenoid/vnc_chrome:CHROME_VERSION',
-				port: '4444',
-				path: '/',
-				tmpfs: {
-					'/tmp': 'size=512m'
-				}
-			}
-		}
-	},
-	firefox: {
-		default: 'FIREFOX_VERSION',
-		versions: {
-			FIREFOX_VERSION: {
-				image: 'selenoid/vnc_firefox:FIREFOX_VERSION',
-				port: '4444',
-				path: '/wd/hub',
-				tmpfs: {
-					'/tmp': 'size=512m'
-				}
-			}
-		}
-	}
-};
+const CHROME_VERSION = core.getInput('chrome_version');
+const FIREFOX_VERSION = core.getInput('firefox_version');
+const SELENOID_START_CMD = 'curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid start';
 
-async function replaceVersions(_chrome: string, _firefox: string) {
-	const template = JSON.stringify(BROWSERS_TEMPLATE);
-	const browsersJson = template
-		.replace(/CHROME_VERSION/g, _chrome)
-		.replace(/FIREFOX_VERSION/g, _firefox);
+async function dispatchCmd(): Promise<void> {
+	if (CHROME_VERSION && FIREFOX_VERSION)
+		execSync(`${SELENOID_START_CMD} --browsers 'chrome:${CHROME_VERSION};firefox:${FIREFOX_VERSION} --tmpfs 512`);
+	else if (CHROME_VERSION) execSync(`${SELENOID_START_CMD} --browsers 'chrome:${CHROME_VERSION}' --tmpfs 512`);
+	else if (FIREFOX_VERSION) execSync(`${SELENOID_START_CMD} --browsers 'firefox:${CHROME_VERSION}' --tmpfs 512`);
+}
 
-	fs.writeFileSync('browsers.json', browsersJson);
-}*/
-
-async function run() {
+async function run(): Promise<void> {
 	try {
-		/*await replaceVersions(
-			core.getInput('chrome_version'),
-			core.getInput('firefox_version')
-		).catch(err => {
-			core.error(err.message);
-		});*/
-
-		await execSync(`curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid start --browsers 'chrome:${core.getInput('chrome_version')}'`);
+		core.info('START INSTALLING SELENOID');
+		await dispatchCmd();
+		core.info('SELENOID INSTALLED SUCCESSFULLY');
 	} catch (error) {
 		core.setFailed(error.message);
 	}
