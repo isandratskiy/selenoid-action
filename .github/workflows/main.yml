@@ -39,10 +39,3 @@ jobs:
             cd $TEST_PROJECT
             ./gradlew -Pthread=2 -Plaunch=remote testChrome
             ./gradlew -Pthread=2 -Plaunch=remote testFirefox
-
-        - name: Check
-          if: always()
-          run: |
-            ls
-            docker ps
-            ./cm version
