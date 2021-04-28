@@ -478,7 +478,7 @@ const FIREFOX_VERSION = core.getInput('firefox_version');
 const SELENOID_START_CMD = 'curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid start';
 async function dispatchCmd() {
     if (CHROME_VERSION && FIREFOX_VERSION)
-        (0,external_child_process_namespaceObject.execSync)(`${SELENOID_START_CMD} --browsers 'chrome:${CHROME_VERSION};firefox:${FIREFOX_VERSION} --tmpfs 512`);
+        (0,external_child_process_namespaceObject.execSync)(`${SELENOID_START_CMD} --browsers 'chrome:${CHROME_VERSION};firefox:${FIREFOX_VERSION}' --tmpfs 512`);
     else if (CHROME_VERSION)
         (0,external_child_process_namespaceObject.execSync)(`${SELENOID_START_CMD} --browsers 'chrome:${CHROME_VERSION}' --tmpfs 512`);
     else if (FIREFOX_VERSION)
