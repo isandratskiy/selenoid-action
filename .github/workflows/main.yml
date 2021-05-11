@@ -4,8 +4,15 @@ on: [push]
 
 jobs:
   setup-selenoid:
-    runs-on: ubuntu-latest
     name: Test Setup Selenoid
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
+
+    runs-on: ${{ matrix.os }}
+
     env:
       LANG: en_US.UTF-8
       LC_CTYPE: en_US.UTF-8
@@ -23,7 +30,7 @@ jobs:
             java-version: 1.8
 
         - name: Set up Selenoid
-          uses: isandratskiy/selenoid-action@v0.3.0
+          uses: isandratskiy/selenoid-action@v0.4.0
           with:
             chrome_version: "90.0"
             firefox_version: "87.0"

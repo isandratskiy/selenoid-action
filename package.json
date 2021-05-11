@@ -1,17 +1,17 @@
 {
   "name": "selenoid-action",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "ncc build src/setup.ts -o dist/setup && ncc build src/cleanup.ts -o dist/cleanup",
+    "build": "ncc build src/setup.ts -o dist/setup",
     "format": "prettier --write \"{,!(node_modules)/**/}*.ts\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/isandratskiy/selenoid-action.git"
   },
-  "author": "",
+  "author": "i.sandratskyi",
   "homepage": "https://github.com/isandratskiy/selenoid-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.7",
