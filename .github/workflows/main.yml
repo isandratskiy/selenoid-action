@@ -27,7 +27,7 @@ jobs:
         - name: Set up Selenoid
           uses: isandratskiy/selenoid-action@v0.4.0
           with:
-            chrome_version: "90.0"
+            chrome_version: "91.0"
             firefox_version: "87.0"
 
         - name: Checkout UI Tests
